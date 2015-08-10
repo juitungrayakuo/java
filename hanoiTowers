@@ -1,0 +1,34 @@
+import java.util.Scanner;
+	public class hanoiTowers{
+		public static void main (String [] args)
+		{
+		System.out.println("How many disks?");
+		Scanner input = new Scanner(System.in);
+		int disks = input.nextInt();
+		System.out.println("Moving from A to C via B");
+		hanoi(disks, "A", "C", "B");
+		}
+
+	public static void hanoi (int n, String original, String target, String helper){
+		if (n==1)
+		{
+			System.out.println("Move from" + original+ "to" + target);
+			return;
+		}
+		else if (n > 0)
+		
+		{
+		hanoi( n-1, helper, target, original);
+		System.out.println("move from "+ original + "to" + helper);
+		}
+		System.out.println ("Move from "+ original +"to "+ target);
+		
+	}}
+
+
+
+
+
+
+	
+
