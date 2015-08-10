@@ -1,0 +1,83 @@
+import java.util.Scanner;
+
+public class runs{
+	public static void main (String [] args){
+		Scanner input = new Scanner (System.in);
+		System.out.println("Wins?");
+		int n = input.nextInt();
+		System.out.println("Losses?");
+		int m = input.nextInt();
+		System.out.println("How many trials?");
+		int trials = input.nextInt();
+		System.out.println("How many runs are you checking for?");
+		int r = input.nextInt();
+
+		int successcounter = 0;
+	
+
+		for ( int u = 0; u<trials; u++)
+		{
+			if (runprob(n,m) == r)
+				successcounter++;
+		}
+		System.out.println("successcounter: " + successcounter);
+		System.out.println(successcounter/(double)trials);
+	}
+
+	//n is wins, m is losses
+	public static double runprob(int n, int m) 
+	{
+		int [] a = new int [n+m];
+		for (int i = 0; i < n; i++)
+			a[i] = 1; //win
+		for (int z = n; z < n+m; z++)
+			a[z] = 0; //losses
+
+		a = shuffle(a);
+
+		int runcounter = 0;
+		boolean iswin = true;
+		for (int i = 0; i < n+m; i++)
+		{
+			
+			if (a[i] == 0 && iswin==true && i!= 0)
+			{
+				runcounter++;
+				iswin = false;
+			}
+
+			else if (a[i] == 1 && i == (n+m-1))
+			{
+				runcounter++;
+				iswin = true;
+			}
+
+			else if (a[i] == 1)
+			{
+				iswin = true;
+			}
+
+			else if (a[i] == 0)
+			{
+				iswin= false;
+			}
+		}
+		//System.out.println("runcounter: " + runcounter);
+		return runcounter;
+	}
+
+	public static int [] shuffle (int [] c)
+	{
+		int z = 3; //switching variable
+		int index = -1; 
+		 for (int i = c.length; i  > 0; i--)
+		 {	
+		 	index = (int)(Math.random()*i);
+		 	z = c[index];
+		 	c[index] =  c[i-1];
+		 	c[i-1] = z;
+		 }
+		 return c;
+	}
+
+}
