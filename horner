@@ -1,0 +1,37 @@
+import java.util.Scanner;
+public class horner{
+public static void main (String [] args){
+	Scanner input = new Scanner (System.in);
+	System.out.println("Degree?");
+	int degree = input.nextInt();
+	double [] coefficients = new double [degree+1];
+	for (int i =0; i <= degree; i++ )
+	{
+		System.out.println("Coefficient for " + (degree-i) + "th degree?");
+		coefficients[i] = input.nextDouble();
+	}
+
+	System.out.println("What's x?");
+	double value = input.nextDouble();
+
+
+	System.out.println(horn(coefficients, value));
+}
+
+public static double horn (double [] coeArray, double xValue){
+	if (coeArray.length == 1)
+		return coeArray[0];
+
+	double [] subArray = new double [coeArray.length-1];
+
+	for (int i = 0; i<subArray.length; i++)
+		subArray[i] = coeArray[i];
+
+	double coe = horn(subArray, xValue);
+	//System.out.println("Coe: "+ coe);
+	return ((coe*xValue) + coeArray[coeArray.length-1]);
+
+}
+
+	
+}
