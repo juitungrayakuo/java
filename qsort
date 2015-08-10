@@ -1,0 +1,99 @@
+import java.util.*;
+
+public class qsort{
+	public static void main(String [] args){
+
+	Scanner input = new Scanner(System.in);
+	System.out.println("How many num?");
+	int num = input.nextInt();
+
+
+
+	double [] a = new double [num];
+	for (int i = 0; i<num; i++)
+			a[i] = Math.random()*100;
+	
+	/*for (int k =0; k<num; k++)
+		System.out.println(a[k]);*/
+
+	long startTime = System.nanoTime(); 
+	double [] z = qs(a, 0, a.length-1);
+
+	long endTime = System.nanoTime();
+	System.out.println("time: "+ (endTime-startTime));
+	/*
+	for (int j =0; j<num; j++)
+		System.out.println(z[j]); */
+		
+
+	}
+
+	public static double [] qs(double [] orig, int startIn, int endIn){
+		
+		if (endIn-startIn < 1)
+			return orig;
+
+		double pivot = orig[startIn];
+		int s = startIn+1;
+		int b = endIn;
+		double temp;
+		
+		if (endIn-startIn ==1)
+				{
+					if (orig[startIn] > orig [endIn]){
+						temp = orig[startIn];
+						orig[startIn] = orig[endIn];
+						orig[endIn] = temp;
+
+					}
+
+					return orig;
+				}
+
+		while (s<b){ 
+
+		while(orig[s] < pivot){
+			if (s<b)
+				s++;
+				
+			
+			else
+				break;
+				}
+		
+
+		while (orig[b] > pivot){
+			if (b>s)
+				b--;
+				
+			else
+				break;
+			
+		}
+
+		temp = orig[s];
+		orig[s] = orig[b];
+		orig[b] = temp;
+		
+	}
+
+	orig[startIn] = orig[s-1];
+	orig[s-1] = pivot;
+
+	//System.out.println("pivot should be in mid, ordered");
+
+	/*for (int k = 0; k<orig.length; k++){
+		
+		System.out.println(orig[k]);
+	}*/
+
+	//System.out.println("s: " + s + "b: " + b);
+	//System.out.println("here");
+	qs(orig, startIn, s);
+	qs(orig, s, endIn);
+	return orig;
+
+	}
+
+
+}
