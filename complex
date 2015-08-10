@@ -1,0 +1,683 @@
+/** Hello! :) This is a complex class. It has a lot of functions. Please be nice to my complex class. Thank you!
+* @author Raya Kuo-Phelps
+* @version 1.0
+ */
+
+public class complex{
+
+	/**this is the variable that stores the real part 
+	*/
+	private double x; //real part
+	/**this is the variable that stores the imag part 
+	*/
+	private double y; //imaginary
+	/**this is the variable that stores the epsilon toerance for comparing two doubles
+	*@see setTolerance
+	*/
+	private static double epsilon = .0001; 
+	/**this is the variable that stores the number of instances that has been created
+	*increments when a new instance is created 
+	*/	
+	private static int instanceCounter = 0;
+
+	/**creates new complex number, sets real and imag 
+	*@param real real part
+	*@param imag imag part
+	*/
+	public complex (double real, double imag)
+		{
+			x = real;
+			y = imag;
+			instanceCounter ++;
+		}
+
+	/** creates new complex number, sets real; imag = 0
+	*@param a real part
+	*/
+	public complex (double a)
+	{
+		this();
+		setReal(a);
+		instanceCounter++;
+	}
+
+
+	/**creates new complex number, 0+0i
+	*/
+	public complex()
+	{ 
+		x = 0.0;
+		y = 0.0;
+		instanceCounter++;
+	}
+
+	/**makes a copy of a complex number
+	*@param w complex number to be copied
+	*/
+	public complex(complex w)
+		{
+			x = w.getReal();
+			y = w.getImag();	
+			instanceCounter++;
+		}
+
+	
+	/** gets real part
+	*@return real part of complex number
+	 */
+	public double getReal()
+	{
+		return (x);
+	}
+
+	/** gets real part
+	*@return real part of complex number
+	*@param a a complex number
+	*/
+	public static double getReal(complex a)
+	{
+		return (a.getReal());
+	}
+
+	/** returns imag part
+	*@return imag part of complex num
+	 */
+	public double getImag()
+	{
+		return (y);
+	}
+
+	/** returns imag part
+	*@param a a complex number
+	*@return imag part of complex num
+	 */
+	public static double getImag(complex a)
+	{
+		return (a.getImag());
+	}
+
+	/** returns angle in radians
+	*@return angle
+	*/
+	public double getAngleRad()
+	{
+		double angle = Math.atan(y/x);
+		if (x<0 && y<0)
+		return (angle + Math.PI);
+
+		if (x<0 && y>0)
+		return Math.PI + angle;
+
+		else
+		return (angle);
+	}
+
+	/** returns angle in radians
+	*@param a complex number
+	*@return angle in radians
+	*/
+	public static double getAngleRad(complex a)
+	{
+		return (a.getAngleRad());
+	}
+
+	/**returns angle in degrees
+	*@return angle in degrees
+	*/
+	public double getAngleDeg()
+	{
+		return (getAngleRad()/Math.PI*180);
+	}
+
+	/**returns angle in degrees
+	*@param a complex number
+	*@return angle in degrees
+	*/
+	public static double getAngleDeg(complex a)
+	{
+		return (a.getAngleDeg());
+	}
+
+	/**returns magnitude
+	*@return magniture
+	*/
+	public double getMag()
+	{
+		return Math.pow(x*x + y*y, 0.5);	
+	}
+
+	/**returns magnitude
+	*@param a complex number
+	*@return magniture
+	*/	
+	public static double getMag(complex a)
+	{
+		return (a.getMag());
+	}
+
+	/**sets the real value
+	*@param a double you want to set it to
+	*/
+	public void setReal(double a)
+	{
+		x = a;
+	}
+
+	/**sets the real value
+	*@param a complex number
+	*@param b double you want to set it to
+	*/
+	public static void setReal(complex a, double b)
+	{
+		a.setReal(b);
+	}
+
+	/**sets the imag value
+	*@param b double you want to set it to
+	*/
+	public void setImag(double b)
+	{
+		y = b;
+	}
+	
+	/**sets the imag value
+	*@param a complex number
+	*@param b double you want to set it to
+	*/
+	public static void setImag(complex a, double b)
+	{
+		a.setImag(b);
+	}
+
+	/**adding one complex number to another
+	*@param z complex number
+	*@return new complex number
+	*/
+	public complex add (complex z)
+	{
+		complex u = new complex ();
+		u.setReal(x + z.getReal());
+		u.setImag(y + z.getImag());
+		return u;
+	}
+
+	/**adding one complex number to a double. Adds the dobule to the real part.
+	*@param a real part to add
+	*@return new complex number
+	*/
+	public complex add (double a)
+	{
+		complex u = new complex ();
+		u.setReal(x + a);
+		u.setImag(y);
+		return u;
+	}
+
+	/**adding a real part and an imaginary part to a complex number
+	*@param a real part
+	*@param b imag part
+	*@return new complex number
+	*/
+	public complex add (double a, double b)
+	{
+		complex u = new complex ();
+		u.setReal(x + a);
+		u.setImag(y + b);
+		return u;
+	}
+
+	/**adding two complex numbers together
+	*@param z complex number
+	*@param w complex number
+	*@return new complex number
+	*/
+	public static complex add(complex z, complex w)
+	{
+		return (new complex (z.getReal() + w.getReal(), z.getImag() + w.getImag()));
+	}
+
+	/**adding one complex number to a double. Adds the dobule to the real part.
+	*@param a complex number
+	*@param b real part to add
+	*@return new complex number
+	*/
+	public static complex add(complex a, double b)
+	{
+		return (a.add(b));
+	}
+
+	/**subtracting one complex number to another
+	*@param z complex number
+	*@return new complex number
+	*/
+	public complex minus (complex z)
+	{
+		complex u = new complex ();
+		u.setReal(x - z.getReal());
+		u.setImag(y - z.getImag());
+		return u;
+	}
+
+	/**subtracting a double from real part of a complex number
+	*@param a double
+	*@return new complex number
+	*/
+	public complex minus (double a)
+	{
+		complex u = new complex ();
+		u.setReal(x - a);
+		u.setImag(y);
+		return u;
+	}
+
+	/**subtracting a real part and a double imag part from a complex number
+	*@param a real part
+	*@param b imag part
+	*@return new complex number
+	*/
+	public complex minus (double a, double b)
+	{
+		complex u = new complex ();
+		u.setReal(x - a);
+		u.setImag(y - b);
+		return u;
+	}
+
+	/**subtracting one complex number from another, a-b
+	*@param a first complex number (that will be decreased)
+	*@param b complex number to be subtracted
+	*@return new complex number
+	*/
+	public static complex minus (complex a, complex b)
+	{
+		return (a.minus(b));
+	}
+
+	/**subtracting a double from real part of a complex number
+	*@param a complex
+	*@param b double to be subtracted
+	*@return new complex number
+	*/
+	public static complex minus (complex a, double b)
+	{
+		return a.minus(b);
+	}
+
+	/**multiplying one complex number with another
+	*@param a complex number
+	*@return new complex number
+	*/
+	public complex multiply (complex a)
+	{
+		complex u = new complex();
+		u.setReal (x* a.getReal() - y*a.getImag());
+		u.setImag (x*a.getImag() + y*a.getReal() );
+		return u;
+	}
+
+	/**multiplying one complex number with a double, using the double as only a real part
+	*@param a double, the multiple
+	*@return new complex number
+	*/
+	public complex multiply (double a)
+	{
+		complex z = new complex (a);
+		complex u = this.multiply(z);
+		return u;
+	}
+
+	/**multiplying two complex numbers together
+	*@param a complex num
+	*@param b complex num
+	*@return new complex number
+	*/
+	public static complex multiply (complex a, complex b)
+	{
+		return (a.multiply(b));
+	}
+
+	/**multiplying a complex with a double, using double as only real
+	*@param a complex num
+	*@param b double
+	*@return new complex number
+	*/
+	public static complex multiply (complex a, double b)
+	{
+		return (a.multiply(b));
+	}
+
+	/**dividing one complex number by another
+	*@param a complex number
+	*@return new complex number
+	*/
+	public complex divide (complex a)
+	{
+		complex conjugate = a.conjugate();
+
+		complex numerator = this.multiply(conjugate);
+		complex denominator = a.multiply(conjugate);
+
+		complex u = new complex();
+
+		//handling 0s
+		if (denominator.getReal() == 0)
+		{
+			System.out.println("Divide by zero error.");
+			System.exit (0);
+		}	
+		
+		u = numerator.multiply (1/ denominator.getReal());
+
+		return u;
+	}
+
+	/**dividing one complex number by a double. using the double as a real part only
+	*@param a double, the multiple
+	*@return new complex number
+	*/
+	public complex divide (double a)
+	{
+		if (a==0)
+			{
+				System.out.println("Divide by zero error.");
+				System.exit(0);
+			}
+		return multiply(1/a);
+	}
+
+	/**dividing two complex numbers 
+	*@param a complex num, dividend
+	*@param b complex num, divisor
+	*@return new complex number
+	*/
+	public static complex divide (complex a, complex b)
+	{
+		return (a.divide(b));
+	}
+
+	/**dividing a complex by a double. using double as real part only.
+	*@param a complex num
+	*@param b double
+	*@return new complex number
+	*/
+	public static complex divide (complex a, double b)
+	{
+		return (a.divide(b));
+	}
+
+	/**takes the natural log of a complex number
+	*@return new complex number
+	*/
+	public complex log()
+	{
+		complex u = new complex();
+		double insidesum = Math.pow(x, 2) + Math.pow (y,2);
+		u.setReal(Math.log(Math.pow(insidesum, 0.5)));
+		u.setImag(Math.atan2(y,x));
+
+		return (u);
+	}
+
+	/**takes the natural log of a complex number
+	*@param a complex number to be taken log of
+	*@return new complex number
+	*/
+	public static complex log(complex a)
+	{
+		return (a.log());
+	}
+
+	/**solves a quadratic equation with complex coefficients, ax^2 + bx + c =0
+	*a is the complex number itself
+	*@param b b coefficient
+	*@param c c coefficient
+	*@return array of the roots
+	*/
+	public complex [] quadraticSolver (complex b, complex c)
+	{
+		return complex.quadraticSolver(this, b, c);
+	}
+
+	/**solves a quadratic equation with complex coefficients, ax^2 + bx + c =0
+	*@param a a coefficient
+	*@param b b coefficient
+	*@param c c coefficient
+	*@return array of the roots
+	*/
+	public static complex [] quadraticSolver (complex a, complex b, complex c)
+	{
+		complex discrim = b.pow(2).minus(a.multiply(c.multiply(4))).pow(0.5);
+		complex [] u = new complex [2];
+		u[0] = b.multiply(-1).add(discrim).divide(a.multiply(2));
+		u[1] = b.multiply(-1).minus(discrim).divide(a.multiply(2));
+		return u;
+
+	}
+
+	/** gets the conjugate
+	*@return the conjugate as a new complex number
+	*/
+	public complex conjugate ()
+	{
+		complex conjugate = new complex();
+		conjugate.setReal (x);
+		conjugate.setImag (-1 * y);
+
+		return conjugate;
+	}
+
+	/** gets the conjugate
+	*@param a complex number that you want to take the conjugate of
+	*@return the conjugate as a new complex number
+	*/
+	public static complex conjugate(complex a)
+	{
+		return (a.conjugate());
+	}
+	
+	/**overrides print complex
+	*@return complex number in regular form as a string
+	*/
+	public String toString()
+	{
+		String str = "";
+		str = str + x + " + (" + y + ")i";
+		return (str);
+	} 
+
+	/**returns an array of the nth roots
+	*@param a the nth root
+	*@return array with the roots
+	*/
+	public complex [] nthroot (double a)
+	{
+		complex [] roots = new complex [(int)a];
+
+		double theta = getAngleRad(); //alternative: this.get_angle_rad();
+		double mag = getMag();
+
+		for (int k = 0; k< a; k++)
+		{
+			complex u = new complex();
+			double newTheta = (theta+2*k*Math.PI)/a;
+			u.setReal( Math.pow(mag, 1.0/a)*Math.cos(newTheta));
+			u.setImag( Math.pow(mag, 1.0/a)*Math.sin(newTheta));
+			roots[k] = u;
+		}
+
+		return roots;
+	}
+
+
+	/**returns an array of the nth roots
+	*@param a complex number
+	*@param b the nth root
+	*@return array with the roots
+	*/
+	public static complex [] nthroot (complex a, double b)
+	{
+		return (a.nthroot(b));
+	}
+
+	/**raises a complex number to the power of a double
+	*@param a double number that you want to raise the complex to
+	*@return a new complex number
+	*/
+	public complex pow(double a)
+	{
+		double constant = Math.pow(getMag(), a);
+		double pow_real = Math.cos(a*getAngleRad());
+		double pow_imag = Math.sin(a*getAngleRad());
+		complex u = new complex (pow_real, pow_imag);
+		return (u.multiply(constant));
+	}
+
+	/**raises a complex number to the power of a complex
+	*@param u complex number that you want to raise the complex to
+	*@return a new complex number
+	*/
+	public complex pow (complex u)
+	{
+		double r = getMag();
+		double theta = getAngleRad();
+		double a = u.getReal();
+		double b = u.getImag();
+
+		complex c = new complex();
+		c.setReal(Math.pow(r, a)*Math.pow(Math.E, -1*theta*b)*Math.cos(a*theta + b*Math.log(r)));
+		c.setImag(Math.pow(r,a)*Math.pow(Math.E, -1*theta*b)*Math.sin(a*theta + b*Math.log(r)));
+		return c;
+	}
+
+	/**returns an array of the complex number to the a/b power 
+	*@param a the numerator of the exponent
+	*@param b the denominator of exponent 
+	*@return array with the roots
+	*/
+	public complex [] pow (double a, double b)
+	{
+		complex [] u = nthroot(b);
+		complex [] raised = new complex [u.length];
+		
+		for (int i =0; i < u.length; i++)
+			raised [i] = u[i].pow(a);
+
+		return raised;
+	}
+
+	/**returns an array of the complex number to the a/b power 
+	*@param a the numerator of the exponent
+	*@param b the denominator of exponent 
+	*@return array with the roots
+	*/
+	public static complex [] pow (complex a, double b, double c)
+	{
+		return (a.pow(b,c));
+	}
+
+
+	/**raises a complex number to the power of a double
+	*@param a complex number
+	*@param b double number that you want to raise the complex to
+	*@return a new complex number
+	*/
+	public static complex pow (complex a, double b)
+	{
+		return (a.pow(b));
+	}
+
+	/**raises a complex number to the power of a complex
+	*@param a complex number that is the base
+	*@param b complex number that you want to raise the complex to
+	*@return a new complex number
+	*/
+	public static complex pow (complex a, complex b)
+	{
+		return (a.pow(b));
+	}
+
+
+	/**sets the tolerance for comparing if doubles are equal
+	*@param a the double you want to set it to
+	*/ 
+	public static void setTolerance(double a)
+	{
+		epsilon = a;
+		return;
+	}
+
+	/**returns the epsilon
+	*@return the value of epsilon
+	*/
+	public static double getEpsilon()
+	{
+		return (epsilon);
+	}
+
+	/**equals method
+	*@param a complex number to be compared
+	*@return true or false depending on if the two complexes are equal
+	*/
+	public boolean equals(complex a)
+	{ 
+	if ((Math.abs(x - a.getReal()))/Math.max(x, a.getReal()) < epsilon)
+		{
+			if ((Math.abs(y - a.getImag()))/Math.max(y , a.getImag()) < epsilon)
+				return (true);
+		}	
+	return (false);
+	}
+
+	/**equals method
+	*@param a complex number to be compared
+	*@param b another complex number to be compared
+	*@return true or false depending on if the two complexes are equal
+	*/
+	public static boolean equals(complex a, complex b)
+	{
+		return a.equals(b);
+	}
+	
+	/**comparesTo method
+	*Order of evaluations: Compares real part, then compares imaginary part
+	*@param z complex number to be compared
+	*@return 1 if this is greater than z, 0 if this is equal to z, -1 if this is less than z
+	*/
+	public int compareTo(complex z)
+	{
+		if (this.equals(z))
+			return (0);
+		//order by real, then imaginary
+		if ((Math.abs(x - z.getReal()))/Math.max(x, z.getReal()) < epsilon)
+		{
+			if (y > z.getImag())
+				return (1);
+			if (y < z.getImag())
+				return (-1);
+		}
+		if  (x > z.getReal())  
+			return (1);
+		else
+			return (-1);
+		
+	}	
+
+	/**comparesTo method
+	*Order of evaluations: Compares real part, then compares imaginary part
+	*@param a complex number to be compared
+	*@param b another complex number to be compared
+	*@return 1 if this is greater than z, 0 if this is equal to z, -1 if this is less than z
+	*/
+	public static int compareTo(complex a, complex b)
+	{
+		return (a.compareTo(b));
+	}
+
+	/**gets numbers of instances of complex class that was created
+	*@return the number of instances that was created
+	*/
+	public static int getInstances()
+	{
+		return instanceCounter;
+	}
+}
