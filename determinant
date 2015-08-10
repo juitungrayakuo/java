@@ -1,0 +1,63 @@
+mport java.util.Scanner;
+public class determinant{
+	public static void main (String [] args){
+		Scanner input = new Scanner(System.in);
+		System.out.println("What dimenstion sq matrix?");
+		int n = input.nextInt();
+		double [] [] matrix = new double [n] [n];
+		for (int i = 0; i<n; i++)
+		{
+			for (int j = 0; j<n; j++)
+			{
+				System.out.println("Fill space "+ (i+1) + ", " + (j+1));
+				matrix [i] [j] = input.nextDouble();
+			}
+			
+		}
+
+		System.out.println("Final det: "+ det(matrix));
+
+	}
+
+	public static double det (double [] [] matrix){
+		if (matrix.length ==1)
+			return matrix[0] [0];
+
+		int n = matrix.length;
+		
+
+		double sum = 0;
+		
+		for (int i = 0; i<n; i++)
+		{
+			double [] [] submatrix = new double [n-1] [n-1];
+			
+			int xcount=0;
+			
+			for (int a = 1; a<n; a++)
+			{
+				int ycount=0;
+				for (int b = 0; b< n; b++)
+				{
+				if (b==i)
+					continue;
+
+				if (xcount<n-1 && ycount<n-1)
+				{
+
+				submatrix[xcount] [ycount] = matrix [a] [b];
+				
+				ycount++;
+				
+				}
+				}
+				
+				xcount++;
+				
+			}
+			sum+=Math.pow(-1,i)*matrix[0][i]*(det(submatrix));	
+		}
+
+		return sum;
+	}
+}
