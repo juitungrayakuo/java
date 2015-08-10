@@ -1,0 +1,42 @@
+import java.util.*;
+
+public class permute{
+	public static void main (String [] args){
+		Scanner input = new Scanner (System.in);
+		System.out.println("What's your original string?");
+		String origin = input.next();
+
+		ArrayList<String> answers = perm(origin);
+		for (int r = 0; r < answers.size(); r++)
+			System.out.println(answers.get(r));
+	}
+
+	public static ArrayList<String> perm(String original){
+		ArrayList<String> toReturn = new ArrayList<String>();
+
+		if (original.length() == 1)
+		{
+			toReturn.add(original);
+			return toReturn;
+		}
+		
+
+		String x = new String (original);
+
+		do 
+		{
+		ArrayList<String> currentSub = perm(x.substring(1));
+
+		for (int i = 0; i< currentSub.size(); i++ )
+			{
+			String toAdd = x.charAt(0) + currentSub.get(i);
+			toReturn.add(toAdd);
+			}
+		x = x.substring(1) + x.charAt(0);
+		} while (x.equals(original) == false);
+
+		return toReturn;
+	}
+
+
+}
