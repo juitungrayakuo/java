@@ -1,0 +1,20 @@
+//n = how many times; x= the number 
+import java.util.Scanner;
+
+public class sqrtRec{
+	public static void main (String [] args){
+	Scanner ins = new Scanner (System.in);
+	System.out.println("What's your n?");
+	int nInput = ins.nextInt();
+	System.out.println("What's x?");
+	int xInput = ins.nextInt();
+
+	System.out.println(mySqrt(nInput, xInput));
+	}
+
+	public static double mySqrt(int n, int x){
+	if (n==1)
+		return Math.pow(x, 0.5);
+	return Math.pow(x+mySqrt(n-1, x),0.5);
+	}
+}
