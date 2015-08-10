@@ -1,0 +1,33 @@
+import java.util.Scanner;
+
+public class bubbletime{
+public static void main (String [] args){
+
+Scanner abc = new Scanner(System.in);
+System.out.println("How many num to sort?");
+
+int num = abc.nextInt();
+double [] h = new double [num];
+
+for (int i =0; i<num; i++)
+	h[i] = (Math.random()*100); //finish filling array
+
+long startTime = System.nanoTime(); 
+for (int j = num; j>0; j--)
+{
+	for (int c = 0; c< j-1; c++)
+	{
+		if(h[c+1]<h[c])
+		{
+			double temp = h[c+1];
+			h[c+1] = h[c];
+			h[c] = temp;
+		}
+	}
+}
+
+long endTime = System.nanoTime();
+System.out.println("time: "+ (endTime-startTime));
+}
+}
+
