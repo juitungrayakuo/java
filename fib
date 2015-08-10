@@ -1,0 +1,41 @@
+import java.util.Scanner;
+
+public class fib{
+	public static void main (String[] args){
+		long a = 0; //first number
+		long b = 1; //second number
+		int counter = 2;
+		long storeoriga = 0; //where to store the a value
+		long sum = 1;
+
+
+		Scanner input = new Scanner(System.in);
+		System.out.println("Which number in the Fib sequence are you looking for?");
+		int n = input.nextInt();
+
+		if (n< 1) //can't take negative values
+		{System.out.println("Invalid.")	;
+		}
+
+		if (n == 1) //first fib seq
+		{System.out.println(a);
+		}
+
+		if (n==2) //second fib seq
+		{System.out.println(b);
+		}
+
+		else 
+		{while (counter< n)
+			{sum = a+b; //the counter keeps traack of where we currently are
+			storeoriga = a;
+			a = b;
+			b = storeoriga+b;
+			counter++;}
+		System.out.println(sum); //print out the final sum
+		}
+
+		}
+
+
+	}
