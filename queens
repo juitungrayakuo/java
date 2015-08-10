@@ -1,3 +1,4 @@
+//Eight Queens Problem, where n doesn't have to be 8.
 import java.util.*;
 
 public class queens{
