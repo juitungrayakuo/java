@@ -1,0 +1,32 @@
+import java.util.Scanner;
+
+public class gcf{
+	public static void main (String [] args){
+
+	Scanner input = new Scanner(System.in);
+	System.out.println("What's the first number?");
+	int num1 = input.nextInt();
+	System.out.println("What's the second number?");
+	int num2 = input.nextInt();
+	int dividend = 0;
+	int divisor = 0;
+	int store = 0;
+	if (num1 > num2)
+	{dividend = num1;
+	divisor = num2;
+	}
+
+	else 
+	{dividend = num2;
+	divisor = num1;
+	}
+
+	while (dividend % divisor != 0)
+	{ store = divisor;
+	divisor = dividend % divisor;
+	dividend = store; // swap two values
+	}
+	
+System.out.println("GCF is: " + divisor);
+	}
+}
