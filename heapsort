@@ -1,0 +1,118 @@
+import java.util.*;
+public class heapsort{
+public static void main (String [] args){
+	Scanner input = new Scanner (System.in);
+	System.out.println("How long is your list?");
+	int length = input.nextInt();
+
+	ArrayList<Double> test = new ArrayList<Double> ();
+	for (int r = 0; r < length; r++)
+		test.add(Math.random()*100);
+
+	long startTime = System.nanoTime(); 
+	ArrayList<Double> ret = heap (test);
+
+	long endTime = System.nanoTime();
+	System.out.println("time: "+ (endTime-startTime));
+	/*System.out.println("Sorted:");
+	for (int j = 0; j < ret.size(); j++)
+		System.out.println(ret.get(j)); */
+
+	
+}
+
+public static ArrayList<Double> heap (ArrayList<Double> orig){
+double temp;
+ArrayList<Double> sorted = new ArrayList<Double> ();
+ArrayList<Double> rank = new ArrayList<Double> ();
+
+for (int i = 0; i< orig.size(); i++)
+{
+sorted.add(orig.get(i));
+int child = i;
+int parent;
+
+while (child > 0){
+	if (child%2 == 0)
+		parent = (child-2)/2;
+	else
+		parent = (child-1)/2; //find index of parents
+
+	if (sorted.get(parent) < sorted.get(child))
+		{
+			temp = sorted.get(child);
+			sorted.set(child, sorted.get(parent));
+			sorted.set(parent, temp); //switch the parent and child values if needed
+		}
+
+	child = parent;
+}
+
+}  //finished making first array
+
+//not sure if this works
+
+
+//check if this works
+for ( int r = 0; r < orig.size(); r++) {
+	
+	rank.add(sorted.get(0));
+	sorted.set(0, sorted.get(sorted.size()-1));
+	sorted.remove(sorted.size()-1);
+	sorted = goinDown(sorted);
+}
+
+return rank;	
+}
+
+public static ArrayList<Double> goinDown (ArrayList<Double> orig){
+
+int par = 0;
+int child1 = 2*par + 1;
+int child2 = 2*par + 2;
+double tempVar;
+
+
+
+while (child1<orig.size()) {
+	if (orig.get(child1) > orig.get(par)){
+
+		if (child2 < orig.size()){
+			if (orig.get(child2)> orig.get(child1)){
+				tempVar = orig.get(par);
+				orig.set(par, orig.get(child2));
+				orig.set(child2, tempVar);
+				par = child2;
+			}
+
+			else{
+			tempVar = orig.get(par);
+			orig.set(par, orig.get(child1));
+			orig.set(child1, tempVar);
+			par = child1;
+			}
+		}
+
+		else{
+			tempVar = orig.get(par);
+			orig.set(par, orig.get(child1));
+			orig.set(child1, tempVar);
+			par = child1;
+		}
+	}
+
+	else{
+		par = orig.size(); 
+		
+	}
+
+child1 = 2*par + 1;
+child2 = 2*par + 2;
+
+}
+
+return orig;	
+}
+
+
+}
