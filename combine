@@ -1,0 +1,49 @@
+//Prints all possible permutations of  a certain length, given an inputted string.
+import java.util.*;
+
+public class combine{
+	public static void main (String[] args){
+		Scanner in = new Scanner (System.in);
+		System.out.println("String?");
+		String origin = in.next();
+		System.out.println("Choose?");
+		int chosen = in.nextInt();
+
+		ArrayList<String> ans = comb(origin, chosen);
+
+		for (int r = 0; r<ans.size(); r++)
+			System.out.println(ans.get(r));
+
+
+	}
+
+	public static ArrayList<String> comb(String original, int choose){
+		ArrayList<String> toReturn = new ArrayList<String> ();
+		int total = original.length(); 
+
+		if (total<choose)
+			return toReturn;
+
+		else if (choose == 1)
+		{
+			for (int i = 0; i< total; i++)
+				toReturn.add(original.substring(i, i+1));
+			return toReturn;
+		}
+
+		//pick off first character
+		ArrayList<String> needAdd = comb(original.substring(1), choose-1); //need to add char
+		ArrayList<String> noChar = comb (original.substring(1), choose);
+
+		for (int j = 0; j<needAdd.size(); j++)
+		{
+			String toAdd = original.charAt(0) + needAdd.get(j);
+			toReturn.add(toAdd);
+		}
+		
+		for (int k = 0; k<noChar.size(); k++)
+			toReturn.add(noChar.get(k));
+
+		return toReturn;
+	}
+}
