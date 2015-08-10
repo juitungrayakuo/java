@@ -1,0 +1,92 @@
+import java.util.*;
+
+public class queens{
+static ArrayList <int [] >totalAnswers = new ArrayList <int[]> ();
+
+public static void main (String [] args){
+	Scanner input = new Scanner (System.in);
+	System.out.println("What size board?");
+	int size = input.nextInt();
+
+	int [] workingBoard = new int [size];
+	for (int r=0; r<size; r++){
+		workingBoard[r] = -1;
+	}
+	place(0, workingBoard);
+	
+
+	System.out.println("Total possib: "+ totalAnswers.size());
+	for (int g = 0; g<totalAnswers.size(); g++){
+		
+		int [] printing = totalAnswers.get(g);
+		System.out.println("");
+		for (int c=0; c<size; c++){
+			System.out.print(printing[c]);
+		}
+	}
+
+}
+
+
+
+
+public static void place (int k, int [] workingBoard){
+
+
+//if trying to add something to the row after, add the completed board to totalAnswers, go back one row
+if (k<0){
+	return; 
+} //end of base case
+
+
+else{ 
+
+if (k == workingBoard.length){ 
+	int [] toAdd = new int [workingBoard.length];
+	System.arraycopy (workingBoard, 0, toAdd, 0, workingBoard.length);
+	totalAnswers.add(toAdd); 
+	place (k-1, workingBoard);
+}
+
+
+
+//if the current setting isn't legal, increment this
+else{
+workingBoard [k] = workingBoard[k] + 1;
+
+
+//if  it's off board, put it back and go back one row
+if (workingBoard[k] >= workingBoard.length){
+	workingBoard[k] = -1; 
+	place (k-1, workingBoard);
+} 
+
+//if legal, place next one in next row
+else if (legal(workingBoard, k) == 1){
+	place (k+1, workingBoard);
+}
+
+//if not legal, move to next spot. so run again
+else if (legal(workingBoard, k)==0){
+	place(k, workingBoard);
+}
+	
+}}
+}
+
+public static int legal (int [] board, int row){
+
+for (int j = 0; j< row; j++){
+	//check verticals
+	if (board[j] == board [row]){
+		return 0;
+	}
+
+	//check diagonals
+	if (board[j] + (row-j) == board[row] || board[j] - (row-j) == board[row]){
+		return 0;
+	}	
+}
+return 1;
+
+}
