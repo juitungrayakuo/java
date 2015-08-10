@@ -1,0 +1,19 @@
+import java.util.Scanner;
+
+public class numreversal{
+	public static void main (String [] args){
+		Scanner input = new Scanner (System.in);
+		System.out.println("original?");
+		int one = input.nextInt();
+
+		System.out.println(numrev(one));
+	}
+
+	public static int numrev (int original){
+		if (original < 10)
+			return original;
+		return ((original%10)*((int)Math.pow(10, (int)Math.log10(original)))) + numrev(original/10);
+
+	}
+
+}
