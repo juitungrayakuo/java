@@ -1,0 +1,50 @@
+import java.util.Scanner;
+public class ceasar{
+	public static void main (String [] args){
+		
+	Scanner input = new Scanner(System.in);
+	System.out.println("Enter your string.");
+	String raw = input.nextLine();
+	
+	System.out.println("Want to 1. encrypt or 2. decrypt?");
+	int choice = input.nextInt();
+	
+	if (choice == 1) //encryption
+	{
+		String hello = raw;
+		for (int i = 0; i< raw.length(); i++)
+			{
+			
+			hello = hello.substring(0,i) + String.valueOf(shift(raw.charAt(i),1))+ raw.substring(i+1, raw.length());
+			}
+
+		System.out.println(hello);
+	}
+
+	if (choice == 2)
+	{
+	String hello = raw;
+
+	for (int shift = 0; shift<26; shift++)
+	{
+		for (int i = 0; i< raw.length(); i++)
+			{
+			hello = hello.substring(0,i) + String.valueOf(shift(raw.charAt(i),shift))+ raw.substring(i+1, raw.length());
+			}
+	System.out.println("Shift "+ shift +": "+hello);
+	}
+		
+	}
+	}
+
+	public static char shift (char old, int number)
+	{
+		if (old == ' ')
+			return (' ');
+		else if (old + (char)number > 'z')
+			return ((char)(old+ number - 26));
+		else
+			return ((char)(old +number));
+
+	}
+}
