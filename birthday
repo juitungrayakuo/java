@@ -1,0 +1,48 @@
+import java.util.Scanner;
+public class birthday{
+	public static void main(String[] args){
+
+	Scanner input = new Scanner(System.in);
+	System.out.println("How many trials?");
+	int trials = input.nextInt();
+
+	double trialcounter = 0;
+	boolean trialmatch=false;
+
+	System.out.println("How many students?");
+	int students = input.nextInt();
+
+	long [] days = new long [365];
+	int day =0;
+
+	for (int j =0; j<trials; j++ )
+	{trialmatch = false;
+	
+		for (int l=0; l<365; l++)
+		{
+		days[l] =0;	
+		}
+
+		for (int i = 0; i<students; i++)
+		{
+		day = (int)(Math.random()*365);
+		//System.out.println("Day: " + day);
+		days[day] += 1;	
+		}
+
+		for (int z = 0; z < 365; z++)
+		{
+		if  (days[z] >= 2)
+		{trialmatch = true;
+		//System.out.println("Match!" + z);} 	
+		}}
+	//System.out.println ("trials:" + (j+1) + "trialmatch: " + trialmatch);
+		
+		if (trialmatch == true)
+			{trialcounter +=1;
+			//System.out.println ("Trialcounter: "+ trialcounter);}
+			}
+	}	
+	
+	System.out.println("Probability: "+ (trialcounter/trials));
+}}
