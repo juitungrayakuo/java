@@ -1,0 +1,19 @@
+public class hTower{
+	public static void main (String [] args){
+
+		System.out.println("How many disks?");
+		Scanner input = new Scanner(System.in);
+		int disks = input.nextInt();
+		
+		hanoi(disks, "Original", "Targeted", "Helper");
+	}
+
+	public static void hanoi(int n, String origin, String target, String via){
+		if (n<=0)
+			return;
+
+		hanoi(n-1, origin, via, target);
+		System.out.println("moved " + origin + " to " + target);
+		hanoi (n-1, via, target, origin);
+	}
+}
