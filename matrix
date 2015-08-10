@@ -1,0 +1,63 @@
+import java.util.Scanner;
+
+public class matrix{
+	public static void main (String[] args){
+
+	Scanner input = new Scanner(System.in);
+	System.out.println("Matrix A: m rows, n columns. Matrix B: n rows, p columns.");
+	System.out.println("What's m, n, p?");
+
+	int m = input.nextInt();
+	int mcounter = 0; 
+	int n = input.nextInt();
+	int ncounter =0;
+	int p = input.nextInt();
+	int pcounter =0;
+	int acounter= 0;
+	double [] [] a = new double [m] [n];
+	double [] [] b = new double [n] [p];
+	double sum =0;
+
+
+	for (mcounter =0; mcounter< m; mcounter++ )
+	{ 
+		for ( ncounter = 0; ncounter<n; ncounter++)
+		{
+			System.out.println("Matrix A: " + (mcounter+1) + ", " + (ncounter+1));
+			a [mcounter] [ncounter] = input.nextDouble();
+		}
+
+	} //finish filling A matrix
+
+	for (ncounter =0; ncounter< n; ncounter++ )
+	{//System.out.println("ncounter: " +ncounter);
+		for ( pcounter = 0; pcounter < p; pcounter++)
+		{	//System.out.println("pcounter " + pcounter);
+			System.out.println("Matrix B: " + (ncounter+1) + ", " + (pcounter+1));
+			b [ncounter] [pcounter] = input.nextDouble();
+
+		}
+
+	} //finish filling B matrix
+
+
+	//begin calculations
+	double [] [] c = new double [m][p];
+
+	for (mcounter =0; mcounter<m; mcounter++)
+	{
+		for (pcounter = 0; pcounter < p; pcounter++)
+		{ sum = 0;
+			for (int k =0; k+1 <= n; k++ )
+			{ //System.out.println( "calculating sum");
+			sum = sum+ a[mcounter][k] * b[k][pcounter]; 
+			}
+		c[mcounter][pcounter] = sum;
+		System.out.println("C Matrix:" + (mcounter+1) + ", " + (pcounter+1) + "= " + sum);
+		}
+
+	}
+
+
+
+}}
