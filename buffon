@@ -1,0 +1,25 @@
+import java.util.Scanner;
+
+public class buffon{
+	public static void main(String [] args){
+	Scanner input = new Scanner(System.in);
+	System.out.println("What length?");
+	double l = input.nextDouble();
+	System.out.println("What distance?");
+	double d = input.nextDouble();
+	System.out.println("How many trials?");
+	int trials = input.nextInt();
+	double success = 0;
+	
+	for (int i = 0; i<trials; i++)
+	{
+	double start = (Math.random()*l);
+	double angle = Math.random()*Math.PI;
+
+	double end = start + (l*Math.sin(angle));
+	if (end>=d)
+		success++;
+	}
+
+	System.out.println(success/trials);
+}}
