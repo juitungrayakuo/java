@@ -1,0 +1,117 @@
+import java.util.*;
+public class inverse{
+	public static void main (String [] args){
+		Scanner input = new Scanner(System.in);
+		System.out.println("What dimenstion sq matrix?");
+		int n = input.nextInt();
+		double [] [] matrix = new double [n] [n];
+
+		for (int i = 0; i<n; i++){
+			for (int j = 0; j<n; j++){
+				matrix [i] [j] = Math.random()*100;
+			}	
+		}
+
+		/*for (int i = 0; i<n; i++){
+			for (int j = 0; j<n; j++){
+				System.out.println("Fill space "+ i + ", " + j);
+				matrix [i] [j] = input.nextDouble();
+				
+			}	
+		}*/ 
+
+		double [][] ans = inv (matrix);
+		/*for (int r = 0; r< n; r++){
+			for (int c = 0; c<n; c++){
+				System.out.println("Ans" + r + "," + c + ": "+ ans[r][c]);
+			}
+		}*/
+	}
+	
+	public static double det (double [] [] matrix){
+		if (matrix.length ==1)
+			return matrix[0] [0];
+
+		int n = matrix.length;
+		
+
+		double sum = 0;
+		
+		for (int i = 0; i<n; i++)
+		{
+			double [] [] submatrix = new double [n-1] [n-1];
+			
+			int xcount=0;
+			
+			for (int a = 1; a<n; a++)
+			{
+				int ycount=0;
+				for (int b = 0; b< n; b++)
+				{
+				if (b==i)
+					continue;
+
+				if (xcount<n-1 && ycount<n-1)
+				{
+
+				submatrix[xcount] [ycount] = matrix [a] [b];
+				
+				ycount++;
+				
+				}
+				}
+				
+				xcount++;
+				
+			}
+			sum+=Math.pow(-1,i)*matrix[0][i]*(det(submatrix));	
+		}
+
+		return sum;
+	}
+
+	public static double [] [] inv (double [] [] orig){
+		int n = orig.length;
+		double [] [] bMatrix = new double [n] [n];
+		double [] [] subMatrix = new double [n-1] [n-1];
+
+		double [] [] flippedB = new double [n] [n ];
+		double determ = det(orig);
+
+		if (determ ==0){
+			System.out.println("divide by zero! returning original");
+			return orig;
+		}
+
+
+		for (int row = 0; row < n; row ++){
+			for (int column = 0; column < n; column ++){
+
+				for (int rCounter = 0, rC = 0; rCounter < n; rCounter++){
+					if (rCounter == row)
+						continue;
+
+					for (int cCounter = 0, cC = 0; cCounter < n; cCounter++){
+						if (cCounter == column)
+							continue;
+
+						subMatrix [rC] [cC] = orig [rCounter] [cCounter];
+						cC++;
+
+					}
+					rC++;
+				} // finish submatrix
+
+			bMatrix [row] [column] = Math.pow(-1, row+column)*det(subMatrix);
+			}
+		} //finished bMatrix
+
+		for (int row = 0; row < n; row ++){
+			for (int column = 0; column < n; column ++){
+				flippedB[column] [row] = (1.0/determ)*bMatrix [row] [column]; }}
+
+		return flippedB;
+	}
+
+
+}
